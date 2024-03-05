@@ -8,10 +8,10 @@
     <body>
         <h1>キャンプ場一覧</h1>
         <a href="/campgrounds/new">新規登録</a>
-        <ul>
+        <ol>
             <% for (let campground of campgrounds) {%>
             <li><a href="/campgrounds/<%= campground._id %>"><%= campground.title %></a></li>
             <% } %>
-        </ul>
+        </ol>
     </body>
 </html>
