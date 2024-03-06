@@ -1,5 +1,5 @@
 {
-    "name": "YelpCamp_Ver1",
+    "name": "yelpcamp-ver1",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
@@ -9,6 +9,7 @@
     "author": "yuki manabe",
     "license": "ISC",
     "dependencies": {
+        "axios": "^1.6.7",
         "ejs": "^3.1.9",
         "ejs-mate": "^4.0.0",
         "express": "^4.18.3",
