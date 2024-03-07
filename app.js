@@ -13,6 +13,7 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false,
     })
     .then(() => {
         console.log("MongoDB コネクションOK");
@@ -29,6 +30,7 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware ----------------------------------------
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routing ----------------------------------------
 app.get("/", (req, res) => {
