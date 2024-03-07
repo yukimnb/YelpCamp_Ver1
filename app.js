@@ -1,12 +1,14 @@
 const express = require("express");
+const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+const { campgroundSchema } = require("./schemas");
+const methodOverride = require("method-override");
 const catchAsync = require("./utils/catchAsync");
 const expressError = require("./utils/ExpressError");
-const methodOverride = require("method-override");
 const Campground = require("./models/campground");
-const app = express();
+const ExpressError = require("./utils/ExpressError");
 
 mongoose
     .connect("mongodb://localhost:27017/yelp-camp", {
@@ -29,6 +31,15 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware ----------------------------------------
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+const validateCampground = (req, res, next) => {
+    const { error } = campgroundSchema.validate(req.body);
+    if (error) {
+        const msg = error.details.map((detail) => detail.message);
+        throw new ExpressError(msg, 400);
+    } else {
+        next();
+    }
+};
 
 // GET ----------------------------------------
 app.get("/", (req, res) => {
@@ -66,6 +77,7 @@ app.get(
 // POST ----------------------------------------
 app.post(
     "/campgrounds",
+    validateCampground,
     catchAsync(async (req, res) => {
         const campground = new Campground(req.body.campground);
         await campground.save();
@@ -76,6 +88,7 @@ app.post(
 // PUT ----------------------------------------
 app.put(
     "/campgrounds/:id",
+    validateCampground,
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
