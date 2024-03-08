@@ -16,8 +16,8 @@ userSchema.plugin(passportLocalMongoose, {
         AttemptTooSoonError: "アカウントは現在ロックされています。後で再試行してください。",
         TooManyAttemptsError: "失敗したログイン試行回数が多すぎるため、アカウントがロックされました。",
         NoSaltValueStoredError: "認証に失敗しました。もう一度試してください。",
-        IncorrectPasswordError: "パスワードまたはユーザー名が不正です。",
-        IncorrectUsernameError: "パスワードまたはユーザー名が不正です。",
+        IncorrectPasswordError: "パスワードまたはユーザー名が間違っています。",
+        IncorrectUsernameError: "パスワードまたはユーザー名が間違っています。",
         UserExistsError: "指定されたユーザー名は既に登録されています。",
     },
 });
