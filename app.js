@@ -9,8 +9,10 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require("./utils/ExpressError");
+
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/users");
 const User = require("./models/user");
 
 mongoose
@@ -64,6 +66,7 @@ app.get("/", (req, res) => {
     res.render("home");
 });
 
+app.use("/", userRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
 
