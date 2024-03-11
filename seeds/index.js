@@ -32,6 +32,7 @@ const seedDB = async () => {
         const resImage = await axios.get("https://api.unsplash.com/photos/random", config);
         const price = Math.floor(Math.random() * 2000) + 1000;
         const camp = new Campground({
+            author: "65ea69549e7ff53456fd2c7f",
             location: `${cities[randomCityIndex].prefecture}${cities[randomCityIndex].city}`,
             title: `${sample(descriptors)}・${sample(places)}`,
             image: resImage.data.urls.regular,
