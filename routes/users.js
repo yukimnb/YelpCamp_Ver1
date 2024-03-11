@@ -27,9 +27,14 @@ router.post("/register", async (req, res) => {
     try {
         const { email, username, password } = req.body;
         const user = new User({ email, username });
-        await User.register(user, password);
-        req.flash("success", "Yelp Campへようこそ");
-        res.redirect("/campgrounds");
+        const registerdUser = await User.register(user, password);
+        req.login(registerdUser, (err) => {
+            if (err) {
+                return next(err);
+            }
+            req.flash("success", "Yelp Campへようこそ");
+            res.redirect("/campgrounds");
+        });
     } catch (e) {
         req.flash("error", e.message);
         res.redirect("/register");
