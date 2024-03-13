@@ -27,17 +27,32 @@ const seedDB = async () => {
             client_id: process.env.UNSPLASH_ACCESS_KEY,
         },
     };
+    const resImage = await axios.get("https://api.unsplash.com/photos/random", config);
+    const resImage2 = await axios.get("https://api.unsplash.com/photos/random", config);
+    const resImage3 = await axios.get("https://api.unsplash.com/photos/random", config);
     for (let i = 0; i < 50; i++) {
         const randomCityIndex = Math.floor(Math.random() * cities.length);
-        const resImage = await axios.get("https://api.unsplash.com/photos/random", config);
         const price = Math.floor(Math.random() * 2000) + 1000;
         const camp = new Campground({
             author: "65ea69549e7ff53456fd2c7f",
             location: `${cities[randomCityIndex].prefecture}${cities[randomCityIndex].city}`,
             title: `${sample(descriptors)}・${sample(places)}`,
-            image: resImage.data.urls.regular,
             description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quae.",
             price,
+            images: [
+                {
+                    url: resImage.data.urls.regular,
+                    filename: resImage.data.id,
+                },
+                {
+                    url: resImage2.data.urls.regular,
+                    filename: resImage2.data.id,
+                },
+                {
+                    url: resImage3.data.urls.regular,
+                    filename: resImage3.data.id,
+                },
+            ],
         });
         await camp.save();
     }
