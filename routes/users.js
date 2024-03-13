@@ -3,16 +3,13 @@ const router = express.Router();
 const passport = require("passport");
 const users = require("../controllers/users");
 
-// GET ----------------------------------------
-router.get("/register", users.renderRegister);
+router.route("/register").get(users.renderRegister).post(users.register);
 
-router.get("/login", users.renderLogin);
+router
+    .route("/login")
+    .get(users.renderLogin)
+    .post(passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), users.login);
 
 router.get("/logout", users.logout);
-
-// POST ----------------------------------------
-router.post("/register", users.register);
-
-router.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), users.login);
 
 module.exports = router;
