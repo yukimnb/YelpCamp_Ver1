@@ -14,9 +14,7 @@
                 <input class="form-control" type="text" name="campground[location]" id="location" required />
                 <div class="valid-feedback">OK!</div>
             </div>
-            <div class="mb-3">
-                <input type="file" name="images" id="" multiple />
-            </div>
+
             <div class="mb-3">
                 <label class="form-label" for="price">価格</label>
                 <div class="input-group">
@@ -42,6 +40,10 @@
                     id="description"
                     required></textarea>
                 <div class="valid-feedback">OK!</div>
+            </div>
+            <div class="mb-3">
+                <label for="images" class="form-label">画像</label>
+                <input class="form-control" type="file" id="images" name="images" multiple />
             </div>
             <div class="mb-3">
                 <button class="btn btn-success">登録する</button>
