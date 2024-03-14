@@ -55,6 +55,9 @@ module.exports.updateCampground = async (req, res) => {
     const imgs = req.files.map((f) => ({ url: f.path.replace("public", ""), filename: f.filename }));
     campground2.images.push(...imgs);
     await campground2.save();
+    if (req.body.deleteImages) {
+        await campground2.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
+    }
     req.flash("success", "キャンプ場を更新しました");
     res.redirect(`/campgrounds/${campground2._id}`);
 };
