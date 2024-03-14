@@ -41,15 +41,15 @@ const seedDB = async () => {
             price,
             images: [
                 {
-                    url: resImage.data.urls.regular,
+                    url: resImage.data.urls.small,
                     filename: resImage.data.id,
                 },
                 {
-                    url: resImage2.data.urls.regular,
+                    url: resImage2.data.urls.small,
                     filename: resImage2.data.id,
                 },
                 {
-                    url: resImage3.data.urls.regular,
+                    url: resImage3.data.urls.small,
                     filename: resImage3.data.id,
                 },
             ],
